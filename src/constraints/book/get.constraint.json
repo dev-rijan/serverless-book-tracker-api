@@ -1,0 +1,8 @@
+{
+  "bookId": {
+    "presence": {
+      "allowEmpty": false
+    },
+    "type": "string"
+  }
+}
