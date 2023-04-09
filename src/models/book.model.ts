@@ -4,21 +4,19 @@ export interface IProps {
   id?: string;
   title: string;
   author: string;
-  readAt: Date | null;
+  readAt?: string;
 }
 
-export interface IBookInterface extends IProps {
-  timestamp: number;
-}
+export type IBookInterface = IProps;
 
 export default class BookModel {
   private _id: string;
   private _title: string;
   private _author: string;
-  private _readAt: Date | null;
+  private _readAt?: string;
 
   constructor(state: IProps) {
-    this._id = UUID();
+    this._id = state.id || UUID();
     this._title = state.title;
     this._author = state.author;
     this._readAt = state.readAt;
@@ -48,11 +46,11 @@ export default class BookModel {
     return this._author;
   }
 
-  set readAt(value: Date | null) {
+  set readAt(value: string | undefined) {
     this._readAt = value;
   }
 
-  get readAt(): Date | null {
+  get readAt(): string | undefined {
     return this._readAt;
   }
 
@@ -62,7 +60,6 @@ export default class BookModel {
       title: this.title,
       author: this.author,
       readAt: this.readAt,
-      timestamp: new Date().getTime(),
     };
   }
 }

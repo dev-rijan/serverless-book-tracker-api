@@ -14,7 +14,7 @@ interface IResponse {
   body: string;
 }
 
-const STATUS_MESSAGES = {
+export const STATUS_MESSAGES = {
   200: Status.SUCCESS,
   201: Status.SUCCESS,
   204: Status.SUCCESS,

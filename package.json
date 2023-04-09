@@ -11,10 +11,16 @@
     "start:offline:debug": "SLS_DEBUG=1 sls offline start --stage dev",
     "dynamodb:install": "sls dynamodb install",
     "lint": "eslint --fix",
-    "prettier": "prettier -w src"
+    "prettier": "prettier -w src",
+    "unit-test": "./node_modules/.bin/mocha \"tests/unit/**/*.ts\" --require ts-node/register"
   },
   "dependencies": {
+    "@types/chai": "^4.3.4",
+    "@types/mocha": "^10.0.1",
     "aws-sdk": "^2.848.0",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "node-fetch": "^3.3.1",
     "uuid": "^8.3.2",
     "validate.js": "^0.13.1"
   },
