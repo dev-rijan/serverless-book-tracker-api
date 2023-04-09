@@ -54,7 +54,7 @@ const serverlessConfiguration: AWS = {
       REGION: "${self:custom.region}",
       STAGE: "${self:custom.stage}",
       BOOK_TABLE: "${self:custom.bookTable}",
-      TASKS_TABLE: "${self:custom.tasksTable}",
+      COMMENTS_TABLE: "${self:custom.commentsTable}",
     },
     iam: {
       role: {
@@ -72,12 +72,12 @@ const serverlessConfiguration: AWS = {
             ],
             Resource: [
               { "Fn::GetAtt": ["BookTable", "Arn"] },
-              { "Fn::GetAtt": ["TasksTable", "Arn"] },
+              { "Fn::GetAtt": ["CommentsTable", "Arn"] },
               {
                 "Fn::Join": [
                   "/",
                   [
-                    { "Fn::GetAtt": ["TasksTable", "Arn"] },
+                    { "Fn::GetAtt": ["CommentsTable", "Arn"] },
                     "index",
                     "book_index",
                   ],
@@ -94,7 +94,7 @@ const serverlessConfiguration: AWS = {
     stage: "${opt:stage, self:provider.stage}",
     notificationMailAddress: "${opt:mail, 'noboru-kudo@mamezou.com'}",
     bookTable: "${self:service}-book-table-${opt:stage, self:provider.stage}",
-    tasksTable: "${self:service}-tasks-table-${opt:stage, self:provider.stage}",
+    commentsTable: "${self:service}-comments-table-${opt:stage, self:provider.stage}",
     tableThroughputs: {
       prod: 5,
       default: 1,

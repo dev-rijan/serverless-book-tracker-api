@@ -2,25 +2,50 @@ import "source-map-support/register";
 
 import ResponseModel from "../../models/response.model";
 import DatabaseService, { QueryItem } from "../../services/database.service";
-import { databaseTables } from "../../utils/util";
-import { wrapAsRequest } from "../../utils/lambda-handler";
+import { databaseTables, validateRequest } from "../../utils/util";
+import requestConstraints from "../../constraints/book/get.constraint.json";
+import { QueryParams, wrapAsRequest } from "../../utils/lambda-handler";
 import { StatusCode } from "../../enums/status-code.enum";
 import { ResponseMessage } from "../../enums/response-message.enum";
 
-const getBookHandler = async (_body: never): Promise<ResponseModel> => {
+const getBookHandler = async (
+  _body: never,
+  queryParams: QueryParams
+): Promise<ResponseModel> => {
   const databaseService = new DatabaseService();
-  const { bookTable } = databaseTables();
+  const { bookTable, commentsTable } = databaseTables();
 
   try {
-    const bookParams: QueryItem = {
-      TableName: bookTable,
+    await validateRequest(queryParams, requestConstraints);
+    const { bookId } = queryParams;
+    const data = await databaseService.getItem({
+      key: bookId!,
+      tableName: bookTable,
+    });
+
+    const params: QueryItem = {
+      TableName: commentsTable,
+      IndexName: "book_index",
+      KeyConditionExpression: "bookId = :bookIdVal",
+      ExpressionAttributeValues: {
+        ":bookIdVal": bookId,
+      },
     };
 
-    const data = await databaseService.scan(bookParams);
+    const results = await databaseService.query(params);
+    const comments = results?.Items?.map((comment) => {
+      return {
+        id: comment.id,
+        comment: comment.comment,
+        commentAt: comment.commentAt,
+      };
+    });
 
     return new ResponseModel(
       {
-        books: data.Items,
+        ...data.Item,
+        commentCount: comments?.length,
+        comments: comments,
       },
       StatusCode.OK,
       ResponseMessage.GET_BOOK_SUCCESS

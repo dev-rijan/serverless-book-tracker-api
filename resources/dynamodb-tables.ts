@@ -12,11 +12,11 @@ export default {
       },
     },
   },
-  TasksTable: {
+  CommentsTable: {
     Type: "AWS::DynamoDB::Table",
     DeletionPolicy: "Delete",
     Properties: {
-      TableName: "${self:provider.environment.TASKS_TABLE}",
+      TableName: "${self:provider.environment.COMMENTS_TABLE}",
       AttributeDefinitions: [
         { AttributeName: "id", AttributeType: "S" },
         { AttributeName: "bookId", AttributeType: "S" },

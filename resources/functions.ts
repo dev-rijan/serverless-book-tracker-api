@@ -39,6 +39,18 @@ export default {
       },
     ],
   },
+  getAllBooks: {
+    handler: "handler.getAllBooks",
+    events: [
+      {
+        http: {
+          method: "GET",
+          path: "books",
+          cors: true,
+        },
+      },
+    ],
+  },
   updateBook: {
     handler: "handler.updateBook",
     events: [
@@ -51,49 +63,13 @@ export default {
       },
     ],
   },
-  createTask: {
-    handler: "handler.createTask",
+  createComment: {
+    handler: "handler.createComment",
     events: [
       {
         http: {
           method: "POST",
-          path: "task",
-          cors: true,
-        },
-      },
-    ],
-  },
-  deleteTask: {
-    handler: "handler.deleteTask",
-    events: [
-      {
-        http: {
-          method: "DELETE",
-          path: "task",
-          cors: true,
-        },
-      },
-    ],
-  },
-  getTask: {
-    handler: "handler.getTask",
-    events: [
-      {
-        http: {
-          method: "GET",
-          path: "task",
-          cors: true,
-        },
-      },
-    ],
-  },
-  updateTask: {
-    handler: "handler.updateTask",
-    events: [
-      {
-        http: {
-          method: "PUT",
-          path: "task",
+          path: "comment",
           cors: true,
         },
       },

@@ -5,7 +5,7 @@
     },
     "type": "string"
   },
-  "taskId": {
+  "comment": {
     "presence": {
       "allowEmpty": false
     },

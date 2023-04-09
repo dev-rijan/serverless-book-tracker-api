@@ -29,13 +29,13 @@ export const createChunks = <T>(data: T[], chunkSize: number): T[][] => {
 
 export type DatabaseProp = {
   bookTable: string;
-  tasksTable: string;
+  commentsTable: string;
 };
 
 export const databaseTables = (): DatabaseProp => {
-  const { BOOK_TABLE, TASKS_TABLE } = process.env;
+  const { BOOK_TABLE, COMMENTS_TABLE } = process.env;
   return {
     bookTable: BOOK_TABLE ?? "unknown-book-table",
-    tasksTable: TASKS_TABLE ?? "unknown-tasks-table",
+    commentsTable: COMMENTS_TABLE ?? "unknown-comments-table",
   };
 };

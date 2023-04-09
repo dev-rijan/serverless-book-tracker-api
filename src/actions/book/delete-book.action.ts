@@ -19,7 +19,7 @@ const deleteBookHandler = async (
   _body: never,
   queryParams: QueryParams
 ): Promise<ResponseModel> => {
-  const { bookTable, tasksTable } = databaseTables();
+  const { bookTable, commentsTable } = databaseTables();
   const databaseService = new DatabaseService();
 
   try {
@@ -48,7 +48,7 @@ const deleteBookHandler = async (
     await databaseService.delete(params); // Delete to-do book
 
     const taskParams: QueryItem = {
-      TableName: tasksTable,
+      TableName: commentsTable,
       IndexName: "book_index",
       KeyConditionExpression: "bookId = :bookIdVal",
       ExpressionAttributeValues: {
@@ -66,10 +66,10 @@ const deleteBookHandler = async (
       if (taskEntities.length > 25) {
         const taskChunks = createChunks(taskEntities, 25);
         await Promise.all(
-          taskChunks.map((tasks) => {
+          taskChunks.map((comments) => {
             return databaseService.batchCreate({
               RequestItems: {
-                [tasksTable]: tasks,
+                [commentsTable]: comments,
               },
             });
           })
@@ -77,7 +77,7 @@ const deleteBookHandler = async (
       } else {
         await databaseService.batchCreate({
           RequestItems: {
-            [tasksTable]: taskEntities,
+            [commentsTable]: taskEntities,
           },
         });
       }
