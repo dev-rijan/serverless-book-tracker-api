@@ -26,19 +26,19 @@ const serverlessConfiguration: AWS = {
       restApi: {
         accessLogging: true,
         format: `{
-"stage" : "$context.stage",
-"requestId" : "$context.requestId",
-"apiId" : "$context.apiId",
-"resource_path" : "$context.resourcePath",
-"resourceId" : "$context.resourceId",
-"http_method" : "$context.httpMethod",
-"sourceIp" : "$context.identity.sourceIp",
-"userAgent" : "$context.identity.userAgent",
-"caller" : "$context.identity.caller",
-"user" : "$context.identity.user",
-"requestTime": "$context.requestTime",
-"status": "$context.status"
-}`.replace(/(\r\n|\n)/gm, ""),
+          "stage" : "$context.stage",
+          "requestId" : "$context.requestId",
+          "apiId" : "$context.apiId",
+          "resource_path" : "$context.resourcePath",
+          "resourceId" : "$context.resourceId",
+          "http_method" : "$context.httpMethod",
+          "sourceIp" : "$context.identity.sourceIp",
+          "userAgent" : "$context.identity.userAgent",
+          "caller" : "$context.identity.caller",
+          "user" : "$context.identity.user",
+          "requestTime": "$context.requestTime",
+          "status": "$context.status"
+        }`.replace(/(\r\n|\n)/gm, ""),
         executionLogging: true,
         level: "ERROR",
         fullExecutionData: false,
@@ -76,13 +76,17 @@ const serverlessConfiguration: AWS = {
               {
                 "Fn::Join": [
                   "/",
-                  [{ "Fn::GetAtt": ["TasksTable", "Arn"] }, "index", "book_index"],
+                  [
+                    { "Fn::GetAtt": ["TasksTable", "Arn"] },
+                    "index",
+                    "book_index",
+                  ],
                 ],
               },
             ],
           },
-        ]
-      }
+        ],
+      },
     },
   },
   custom: {
@@ -113,10 +117,10 @@ const serverlessConfiguration: AWS = {
       bundle: true,
       minify: true,
       sourcemap: true,
-      exclude: ['aws-sdk'],
-      target: 'node14',
-      define: { 'require.resolve': undefined },
-      platform: 'node',
+      exclude: ["aws-sdk"],
+      target: "node14",
+      define: { "require.resolve": undefined },
+      platform: "node",
       concurrency: 10,
     },
     "serverless-offline": {

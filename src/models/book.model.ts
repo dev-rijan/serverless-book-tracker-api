@@ -2,7 +2,9 @@ import { v4 as UUID } from "uuid";
 
 export interface IProps {
   id?: string;
-  name: string;
+  title: string;
+  author: string;
+  readAt: Date | null;
 }
 
 export interface IBookInterface extends IProps {
@@ -11,11 +13,15 @@ export interface IBookInterface extends IProps {
 
 export default class BookModel {
   private _id: string;
-  private _name: string;
+  private _title: string;
+  private _author: string;
+  private _readAt: Date | null;
 
-  constructor({ id = UUID(), name = "" }: IProps) {
-    this._id = id;
-    this._name = name;
+  constructor(state: IProps) {
+    this._id = UUID();
+    this._title = state.title;
+    this._author = state.author;
+    this._readAt = state.readAt;
   }
 
   set id(value: string) {
@@ -26,18 +32,36 @@ export default class BookModel {
     return this._id;
   }
 
-  set name(value: string) {
-    this._name = value;
+  set title(value: string) {
+    this._title = value;
   }
 
-  get name(): string {
-    return this._name;
+  get title(): string {
+    return this._title;
+  }
+
+  set author(value: string) {
+    this._author = value;
+  }
+
+  get author(): string {
+    return this._author;
+  }
+
+  set readAt(value: Date | null) {
+    this._readAt = value;
+  }
+
+  get readAt(): Date | null {
+    return this._readAt;
   }
 
   toEntityMappings(): IBookInterface {
     return {
       id: this.id,
-      name: this.name,
+      title: this.title,
+      author: this.author,
+      readAt: this.readAt,
       timestamp: new Date().getTime(),
     };
   }

@@ -13,3 +13,5 @@ jspm_packages
 .vscode
 .idea
 .dynamodb
+dynamodb_local
+.esbuild

@@ -24,14 +24,14 @@ const createBookHandler = async (
       TableName: databaseTables().bookTable,
       Item: {
         id: data.id,
-        name: data.name,
-        createdAt: data.timestamp,
-        updatedAt: data.timestamp,
+        title: data.title,
+        author: data.author,
+        readAt: data.readAt,
       },
     };
     await databaseService.create(params);
     return new ResponseModel(
-      { bookId: data.id },
+      { book: data },
       StatusCode.CREATED,
       ResponseMessage.CREATE_BOOK_SUCCESS
     );

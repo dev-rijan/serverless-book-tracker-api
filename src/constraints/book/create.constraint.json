@@ -1,5 +1,11 @@
 {
-  "name": {
+  "title": {
+    "presence": {
+      "allowEmpty": false,
+      "type": "string"
+    }
+  },
+  "author": {
     "presence": {
       "allowEmpty": false,
       "type": "string"

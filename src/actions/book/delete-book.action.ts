@@ -31,6 +31,7 @@ const deleteBookHandler = async (
       key: bookId!,
       tableName: bookTable,
     });
+
     if (!existsItem) {
       return new ResponseModel(
         {},
@@ -43,6 +44,7 @@ const deleteBookHandler = async (
       TableName: bookTable,
       Key: { id: bookId },
     };
+
     await databaseService.delete(params); // Delete to-do book
 
     const taskParams: QueryItem = {
@@ -53,6 +55,7 @@ const deleteBookHandler = async (
         ":bookIdVal": bookId,
       },
     };
+
     const results = await databaseService.query(taskParams);
 
     if (results?.Items && results?.Items.length) {

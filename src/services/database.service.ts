@@ -45,11 +45,11 @@ const documentClient = new AWS.DynamoDB.DocumentClient();
 
 export default class DatabaseService {
   getItem = async ({
-                     key,
-                     hash,
-                     hashValue,
-                     tableName,
-                   }: Item): Promise<GetItemOutput> => {
+    key,
+    hash,
+    hashValue,
+    tableName,
+  }: Item): Promise<GetItemOutput> => {
     const params = {
       TableName: tableName,
       Key: {
@@ -65,20 +65,20 @@ export default class DatabaseService {
     }
     console.log("item does not exist");
     throw new ResponseModel(
-      {id: key},
+      { id: key },
       StatusCode.NOT_FOUND,
       ResponseMessage.GET_ITEM_ERROR
     );
   };
 
   existsItem = async ({
-                        key,
-                        hash,
-                        hashValue,
-                        tableName,
-                      }: Item): Promise<boolean> => {
+    key,
+    hash,
+    hashValue,
+    tableName,
+  }: Item): Promise<boolean> => {
     try {
-      await this.getItem({key, hash, hashValue, tableName});
+      await this.getItem({ key, hash, hashValue, tableName });
       return true;
     } catch (e) {
       if (e instanceof ResponseModel) {
