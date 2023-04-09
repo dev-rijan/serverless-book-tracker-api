@@ -10,7 +10,7 @@ import {
   databaseTables,
   validateRequest,
 } from "../../utils/util";
-import requestConstraints from "../../constraints/book/get.constraint.json";
+import { BookQuerySchema } from "../../schemas/book.schema";
 import { QueryParams, wrapAsRequest } from "../../utils/lambda-handler";
 import { StatusCode } from "../../enums/status-code.enum";
 import { ResponseMessage } from "../../enums/response-message.enum";
@@ -23,7 +23,7 @@ const deleteBookHandler = async (
   const databaseService = new DatabaseService();
 
   try {
-    await validateRequest(queryParams, requestConstraints);
+    await validateRequest(queryParams, BookQuerySchema);
     const { bookId } = queryParams;
 
     // check book exists

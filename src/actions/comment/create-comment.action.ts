@@ -4,7 +4,7 @@ import CommentModel, { ICommentInterface } from "../../models/comment.model";
 import ResponseModel from "../../models/response.model";
 import DatabaseService, { PutItem } from "../../services/database.service";
 import { databaseTables, validateRequest } from "../../utils/util";
-import requestConstraints from "../../constraints/comment/create.constraint.json";
+import { CommentSchema } from "../../schemas/comment.schema";
 import { wrapAsRequest } from "../../utils/lambda-handler";
 import { StatusCode } from "../../enums/status-code.enum";
 import { ResponseMessage } from "../../enums/response-message.enum";
@@ -17,7 +17,7 @@ const createCommentHandler = async (
 
   try {
     await Promise.all([
-      validateRequest(body, requestConstraints),
+      validateRequest(body, CommentSchema),
       databaseService.getItem({
         key: body.bookId,
         tableName: bookTable,

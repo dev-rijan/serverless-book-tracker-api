@@ -3,7 +3,7 @@ import "source-map-support/register";
 import ResponseModel from "../../models/response.model";
 import DatabaseService, { QueryItem } from "../../services/database.service";
 import { databaseTables, validateRequest } from "../../utils/util";
-import requestConstraints from "../../constraints/book/get.constraint.json";
+import { BookQuerySchema } from "../../schemas/book.schema";
 import { QueryParams, wrapAsRequest } from "../../utils/lambda-handler";
 import { StatusCode } from "../../enums/status-code.enum";
 import { ResponseMessage } from "../../enums/response-message.enum";
@@ -16,7 +16,7 @@ const getBookHandler = async (
   const { bookTable, commentsTable } = databaseTables();
 
   try {
-    await validateRequest(queryParams, requestConstraints);
+    await validateRequest(queryParams, BookQuerySchema);
     const { bookId } = queryParams;
     const data = await databaseService.getItem({
       key: bookId!,
@@ -43,9 +43,11 @@ const getBookHandler = async (
 
     return new ResponseModel(
       {
-        ...data.Item,
-        commentCount: comments?.length,
-        comments: comments,
+        book: {
+          ...data.Item,
+          commentCount: comments?.length,
+          comments: comments,
+        },
       },
       StatusCode.OK,
       ResponseMessage.GET_BOOK_SUCCESS

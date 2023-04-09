@@ -12,6 +12,10 @@
     "outDir": "lib",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
+     "types" : [
+      "node",
+      "jest"
+    ]
   },
   "include": ["src"],
   "exclude": [
@@ -19,6 +23,8 @@
     ".serverless/**/*",
     ".webpack/**/*",
     "_warmup/**/*",
-    ".vscode/**/*"
+    ".vscode/**/*",
+    "tests/**/*",
+    "**/**/*.test.ts"
   ]
 }

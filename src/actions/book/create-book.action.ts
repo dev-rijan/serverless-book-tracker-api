@@ -6,7 +6,7 @@ import ResponseModel from "../../models/response.model";
 import DatabaseService, { PutItem } from "../../services/database.service";
 import { databaseTables, validateRequest } from "../../utils/util";
 
-import requestConstraints from "../../constraints/book/create.constraint.json";
+import { BookSchema } from "../../schemas/book.schema";
 import { wrapAsRequest } from "../../utils/lambda-handler";
 import { StatusCode } from "../../enums/status-code.enum";
 import { ResponseMessage } from "../../enums/response-message.enum";
@@ -15,7 +15,7 @@ const createBookHandler = async (
   body: IBookInterface
 ): Promise<ResponseModel> => {
   try {
-    await validateRequest(body, requestConstraints);
+    await validateRequest(body, BookSchema);
     const databaseService = new DatabaseService();
 
     const bookModel = new BookModel(body);

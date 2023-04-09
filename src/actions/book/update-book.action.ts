@@ -3,7 +3,7 @@ import "source-map-support/register";
 import ResponseModel from "../../models/response.model";
 import DatabaseService, { UpdateItem } from "../../services/database.service";
 import { databaseTables, validateRequest } from "../../utils/util";
-import requestConstraints from "../../constraints/book/update.constraint.json";
+import { BookSchema } from "../../schemas/book.schema";
 import { wrapAsRequest } from "../../utils/lambda-handler";
 import { StatusCode } from "../../enums/status-code.enum";
 import { ResponseMessage } from "../../enums/response-message.enum";
@@ -18,7 +18,7 @@ const updateBookHandler = async (body: {
 
   try {
     await Promise.all([
-      validateRequest(body, requestConstraints),
+      validateRequest(body, BookSchema),
       databaseService.getItem({ key: bookId, tableName: bookTable }),
     ]);
 

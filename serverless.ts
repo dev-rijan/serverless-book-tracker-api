@@ -13,6 +13,7 @@ const serverlessConfiguration: AWS = {
     "serverless-api-gateway-throttling",
     "serverless-plugin-subscription-filter",
     "serverless-plugin-aws-alerts",
+    "serverless-dotenv-plugin",
   ],
   package: {
     individually: true,
@@ -92,9 +93,10 @@ const serverlessConfiguration: AWS = {
   custom: {
     region: "${opt:region, self:provider.region}",
     stage: "${opt:stage, self:provider.stage}",
-    notificationMailAddress: "${opt:mail, 'noboru-kudo@mamezou.com'}",
+    notificationMailAddress: "${opt:mail, 'rijanadhikari@gmail.com'}",
     bookTable: "${self:service}-book-table-${opt:stage, self:provider.stage}",
-    commentsTable: "${self:service}-comments-table-${opt:stage, self:provider.stage}",
+    commentsTable:
+      "${self:service}-comments-table-${opt:stage, self:provider.stage}",
     tableThroughputs: {
       prod: 5,
       default: 1,

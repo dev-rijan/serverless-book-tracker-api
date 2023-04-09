@@ -1,18 +1,24 @@
-import validate from "validate.js/validate";
+import Ajv, { JSONSchemaType } from "ajv";
 
 import ResponseModel from "../models/response.model";
 
 export const validateRequest = <INPUT>(
   values: INPUT,
-  constraints: { [key in string]: unknown }
+  schema: JSONSchemaType<INPUT>
 ): Promise<INPUT> => {
   return new Promise<INPUT>((resolve, reject) => {
-    const validation = validate(values, constraints);
-    if (typeof validation === "undefined") {
+    const ajv = new Ajv();
+    const validate = ajv.compile(schema);
+
+    if (validate(values)) {
       resolve(values);
     } else {
       reject(
-        new ResponseModel({ validation }, 400, "required fields are missing")
+        new ResponseModel(
+          { errors: validate.errors },
+          400,
+          "required fields are missing"
+        )
       );
     }
   });

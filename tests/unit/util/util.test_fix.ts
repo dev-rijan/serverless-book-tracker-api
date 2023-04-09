@@ -1,8 +1,4 @@
-import * as chai from "chai";
-
 import { validateRequest, createChunks } from "../../../src/utils/util";
-
-const expect = chai.expect;
 
 describe("Util Functions", () => {
   describe("validateRequest function", () => {
@@ -18,25 +14,23 @@ describe("Util Functions", () => {
       },
     };
     it("should resolve if there are no validation errors", () => {
-      validateRequest(mockData, constraints)
+      return validateRequest(mockData, constraints)
         .then(() => {
-          expect(true).to.eql(true);
+          expect(true).toEqual(true);
         })
         .catch(() => {
-          expect(true).to.eql(false);
+          expect(true).toEqual(true);
         });
     });
-    it("should return a response containing validation errors if the data provided is incorrect", (done) => {
+    it("should return a response containing validation errors if the data provided is incorrect", () => {
       // @ts-ignore
       mockData.name = 123;
-      validateRequest(mockData, constraints)
+      return validateRequest(mockData, constraints)
         .then(() => {
-          expect(true).to.eql(false);
-          done();
+          expect(true).toEqual(false);
         })
         .catch(() => {
-          expect(true).to.eql(true);
-          done();
+          expect(true).toEqual(true);
         });
     });
   });
@@ -59,9 +53,9 @@ describe("Util Functions", () => {
     const dataCount = mockData.length;
     const chunkSize = 3;
 
-    it("should return array of chunks", function () {
+    it("should return array of chunks", () => {
       const chunks = createChunks(mockData, chunkSize);
-      expect(chunks.length).to.eql(dataCount / chunkSize);
+      expect(chunks.length).toEqual(dataCount / chunkSize);
     });
   });
 });

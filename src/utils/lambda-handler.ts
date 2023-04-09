@@ -13,7 +13,7 @@ export type RequestHandler<REQ> = (
   context: Context
 ) => Promise<ResponseModel>;
 
-export type QueryParams = Record<string, string | undefined>;
+export type QueryParams = Record<string, string>;
 
 export const wrapAsRequest = <REQ = unknown>(
   handler: RequestHandler<REQ>

@@ -1,17 +1,12 @@
-import * as chai from "chai";
-
 import BookModel from "../../../src/models/book.model";
-
 const bookMock = require("../../mocks/task.mock.json");
-
-const expect = chai.expect;
 
 describe("Model/Book.model", () => {
   describe("Ensure entity mapping", () => {
     it("should return an object with all of the entity values", () => {
       const bookModel = new BookModel(bookMock);
 
-      expect(bookModel.toEntityMappings()).to.eql({
+      expect(bookModel.toEntityMappings()).toEqual({
         id: bookMock.id,
         title: bookMock.title,
         author: bookMock.author,
@@ -24,9 +19,9 @@ describe("Model/Book.model", () => {
     it("should be able to get book the hydrated variables from the model", () => {
       const bookModel = new BookModel(bookMock);
 
-      expect(bookModel.id).to.eql(bookMock.id);
-      expect(bookModel.title).to.eql(bookMock.title);
-      expect(bookModel.author).to.eql(bookMock.author);
+      expect(bookModel.id).toEqual(bookMock.id);
+      expect(bookModel.title).toEqual(bookMock.title);
+      expect(bookModel.author).toEqual(bookMock.author);
     });
   });
 });

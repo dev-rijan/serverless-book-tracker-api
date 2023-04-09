@@ -1,12 +1,8 @@
-import * as chai from "chai";
-
 import ResponseModel, {
   STATUS_MESSAGES,
 } from "../../../src/models/response.model";
 
 const responseMock = require("../../mocks/response.mock.json");
-
-const expect = chai.expect;
 
 describe("Model/Response.model", () => {
   describe("Ensure setting and getting of variables", () => {
@@ -16,12 +12,12 @@ describe("Model/Response.model", () => {
     );
 
     it("should set the status code correctly", () => {
-      expect(responseModel.code).to.eql(responseMock.code);
+      expect(responseModel.code).toEqual(responseMock.code);
     });
 
     it("should set the message correctly", () => {
       responseModel.setBodyVariable("message", responseMock.message);
-      expect(responseModel.message).to.eql(responseMock.message);
+      expect(responseModel.message).toEqual(responseMock.message);
     });
   });
 
@@ -33,7 +29,7 @@ describe("Model/Response.model", () => {
     );
 
     it("should generate a response object", () => {
-      expect(responseModel.generate()).to.eql({
+      expect(responseModel.generate()).toEqual({
         statusCode: responseMock.code,
         headers: responseMock.headers,
         body: JSON.stringify({
