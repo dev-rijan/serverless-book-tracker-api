@@ -26,7 +26,7 @@ const deleteBookHandler = async (
     await validateRequest(queryParams, requestConstraints);
     const { bookId } = queryParams;
 
-    // check item exists
+    // check book exists
     const existsItem = await databaseService.existsItem({
       key: bookId!,
       tableName: bookTable,
@@ -45,9 +45,9 @@ const deleteBookHandler = async (
       Key: { id: bookId },
     };
 
-    await databaseService.delete(params); // Delete to-do book
+    await databaseService.delete(params); // Delete book
 
-    const taskParams: QueryItem = {
+    const commentParams: QueryItem = {
       TableName: commentsTable,
       IndexName: "book_index",
       KeyConditionExpression: "bookId = :bookIdVal",
@@ -56,17 +56,17 @@ const deleteBookHandler = async (
       },
     };
 
-    const results = await databaseService.query(taskParams);
+    const results = await databaseService.query(commentParams);
 
     if (results?.Items && results?.Items.length) {
-      const taskEntities = results?.Items?.map((item) => {
-        return { DeleteRequest: { Key: { id: item.id } } };
+      const commentEntities = results?.Items?.map((item) => {
+        return { DeleteRequest: { Key: { id: item.id, bookId: item.bookId } } };
       });
 
-      if (taskEntities.length > 25) {
-        const taskChunks = createChunks(taskEntities, 25);
+      if (commentEntities.length > 25) {
+        const commentChunks = createChunks(commentEntities, 25);
         await Promise.all(
-          taskChunks.map((comments) => {
+          commentChunks.map((comments) => {
             return databaseService.batchCreate({
               RequestItems: {
                 [commentsTable]: comments,
@@ -77,7 +77,7 @@ const deleteBookHandler = async (
       } else {
         await databaseService.batchCreate({
           RequestItems: {
-            [commentsTable]: taskEntities,
+            [commentsTable]: commentEntities,
           },
         });
       }
