@@ -22,7 +22,7 @@ describe("POST /book - Create book", () => {
   });
 
   it("should expect a success message", () => {
-    expect(response.data.message).toEqual("To-do book successfully created");
+    expect(response.data.message).toEqual("Book successfully created");
   });
 
   it("should check that data exists in DynamoDB", async () => {

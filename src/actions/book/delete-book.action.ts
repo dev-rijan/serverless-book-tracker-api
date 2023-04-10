@@ -35,7 +35,7 @@ const deleteBookHandler = async (
     if (!existsItem) {
       return new ResponseModel(
         {},
-        StatusCode.NO_CONTENT,
+        StatusCode.NOT_FOUND,
         ResponseMessage.DELETE_BOOK_NOTFOUND
       );
     }
