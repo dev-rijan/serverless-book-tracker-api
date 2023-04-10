@@ -15,7 +15,7 @@ const _delete = (url: string, params = {}): Promise<AxiosResponse> => {
   });
 };
 
-const post = (data = {}, url = ""): Promise<AxiosResponse> => {
+const _post = (data = {}, url: string): Promise<AxiosResponse> => {
   return new Promise((resolve, reject) => {
     return axios
       .post(`${BASE_URL}${url}`, data)
@@ -28,7 +28,7 @@ const post = (data = {}, url = ""): Promise<AxiosResponse> => {
   });
 };
 
-const get = (bookId: string, url: string): Promise<AxiosResponse> => {
+const _get = (bookId: string, url: string): Promise<AxiosResponse> => {
   return new Promise((resolve, reject) => {
     return axios
       .get(`${BASE_URL}${url}?bookId=${bookId}`)
@@ -41,10 +41,24 @@ const get = (bookId: string, url: string): Promise<AxiosResponse> => {
   });
 };
 
+const __get = (url: string, params = {}): Promise<AxiosResponse> => {
+  return new Promise((resolve, reject) => {
+    return axios
+      .get(`${BASE_URL}${url}`, { params: params })
+      .then((response: AxiosResponse) => {
+        resolve(response.data);
+      })
+      .catch((error: AxiosError) => {
+        reject(error);
+      });
+  });
+};
+
 export default {
-  createBook: (data): Promise<AxiosResponse> => post(data, "book"),
-  getBook: (bookId: string): Promise<AxiosResponse> => get(bookId, "book"),
-  updateBook: (data) => post(data, "book"),
+  createBook: (data): Promise<AxiosResponse> => _post(data, "book"),
+  getBook: (bookId: string): Promise<AxiosResponse> => _get(bookId, "book"),
+  getAllBooks: (): Promise<AxiosResponse> => __get("books"),
+  updateBook: (data) => _post(data, "book"),
   deleteBook: (params = {}): Promise<AxiosResponse> => _delete("book", params),
   //   createTask: (data) => post(data, "book/create"),
 };
