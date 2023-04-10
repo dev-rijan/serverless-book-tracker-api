@@ -58,7 +58,7 @@ export default {
   createBook: (data): Promise<AxiosResponse> => _post(data, "book"),
   getBook: (bookId: string): Promise<AxiosResponse> => _get(bookId, "book"),
   getAllBooks: (): Promise<AxiosResponse> => __get("books"),
-  updateBook: (data) => _post(data, "book"),
+  // updateBook: (data) => _post(data, "book"),
   deleteBook: (params = {}): Promise<AxiosResponse> => _delete("book", params),
-  //   createTask: (data) => post(data, "book/create"),
+  createComment: (data): Promise<AxiosResponse> => _post(data, "comment"),
 };
