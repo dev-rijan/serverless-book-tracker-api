@@ -3,6 +3,8 @@
 AWS serverless(lambda, dynamodb) using serverless framework.  
 Also configured dynamodb and serverless-offline for local development.
 
+* For api docs: [Api docs](docs/README.md)
+
 ## Install and run locally
 
 For development, you need to have serverless, npm and/or yarn globally installed.  
