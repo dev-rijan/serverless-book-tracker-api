@@ -1,9 +1,20 @@
-# Serverless example with typescript
+# Book tracker app api
 
-AWS serverless(lambda, dynamodb) example(to-do list app) using serverless framework.
+AWS serverless(lambda, dynamodb) using serverless framework.
 
-## Install
+## Install and run locally
 
+For development, you need to have serverless, npm and/or yarn globally installed.
+I also prefer using NVM to manage my Node versions.
+Tested in node v14.
+
+Step1: Install serverless framework CLI
+```shell
+npm install -g serverless
+```
+
+Step2: Configure AWS
+Setup AWS CLI if you have not already.
 ```shell
 npm install
 ```
