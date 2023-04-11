@@ -26,9 +26,11 @@ step3: start local server
 ```shell
 # install dynamodb-local
 npm run dynamodb:install
+```
 If you get the error installing local dynamodb, Please delete package-lock.json and try to install package again.  
 For detail here is recent bug in [dunamodb local](https://github.com/99x/serverless-dynamodb-local/issues/294#issuecomment-1493389420)
 
+```
 # run serverless-offline
 npm run start:offline
 ```
