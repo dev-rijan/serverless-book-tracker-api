@@ -1,7 +1,7 @@
 {
-  "name": "todo-list",
+  "name": "book-tracker",
   "version": "1.0.0",
-  "description": "todo-list app",
+  "description": "book tracker app",
   "main": "handler.js",
   "scripts": {
     "deploy:prod": "sls deploy --stage prod",
@@ -12,8 +12,7 @@
     "dynamodb:install": "sls dynamodb install",
     "lint": "eslint --fix",
     "prettier": "prettier -w src",
-    "test": "jest",
-    "unit-test": "./node_modules/.bin/mocha \"tests/unit/**/*.ts\" --require ts-node/register"
+    "test": "jest"
   },
   "dependencies": {
     "@types/chai": "^4.3.4",

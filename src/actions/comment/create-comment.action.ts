@@ -23,8 +23,8 @@ const createCommentHandler = async (
         tableName: bookTable,
       }),
     ]);
-    const taskModel = new CommentModel(body);
-    const data = taskModel.toEntityMapping();
+    const commentModel = new CommentModel(body);
+    const data = commentModel.toEntityMapping();
 
     const params: PutItem = {
       TableName: commentsTable,
@@ -32,13 +32,12 @@ const createCommentHandler = async (
         id: data.id,
         bookId: data.bookId,
         comment: data.comment,
-        // createdAt: data.timestamp,
-        // updatedAt: data.timestamp,
+        commentAt: data.commentAt,
       },
     };
     await databaseService.create(params);
     return new ResponseModel(
-      { taskId: data.id },
+      { commentId: data.id },
       StatusCode.CREATED,
       ResponseMessage.CREATE_COMMENT_SUCCESS
     );

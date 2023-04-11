@@ -51,18 +51,6 @@ export default {
       },
     ],
   },
-  updateBook: {
-    handler: "handler.updateBook",
-    events: [
-      {
-        http: {
-          method: "PUT",
-          path: "book",
-          cors: true,
-        },
-      },
-    ],
-  },
   createComment: {
     handler: "handler.createComment",
     events: [
