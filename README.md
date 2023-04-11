@@ -31,6 +31,16 @@ npm run dynamodb:install
 npm run start:offline
 ```
 
+For lint 
+```
+npm run lint
+```
+
+Tests: Jest is used for tests
+```
+npm run test
+```
+
 ### Deploy
 
 First, set up your AWS settings and run the following command.
