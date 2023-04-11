@@ -4,9 +4,9 @@
   "description": "book tracker app",
   "main": "handler.js",
   "scripts": {
-    "deploy:prod": "sls deploy --stage prod",
-    "package:prod": "sls package --stage prod",
-    "undeploy:prod": "sls remove --stage prod",
+    "deploy:prod": "sls deploy --stage v1",
+    "package:prod": "sls package --stage v1",
+    "undeploy:prod": "sls remove --stage v1",
     "start:offline": "sls offline start --stage dev",
     "start:offline:debug": "SLS_DEBUG=1 sls offline start --stage dev",
     "dynamodb:install": "sls dynamodb install",
@@ -62,7 +62,7 @@
   },
   "jest": {
     "roots": [
-      "<rootDir>/tests/feature/comment/"
+      "<rootDir>/tests"
     ],
     "testMatch": [
       "**/__tests__/**/*.+(ts|tsx|js)",

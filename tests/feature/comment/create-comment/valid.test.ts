@@ -26,13 +26,12 @@ describe("POST /comment - Valid comment created in DB", () => {
       });
       response = commentBody;
     } catch (error) {
-      response = error.response.body;
+      response = error.response.data;
     }
   });
 
-  it("should expect a 200 status code", () => {
-    console.log(response);
-    expect(response.status).toEqual(200);
+  it("should expect a 201 status code", () => {
+    expect(response.status).toEqual(201);
   });
 
   it("should expect a success message", () => {
@@ -41,8 +40,9 @@ describe("POST /comment - Valid comment created in DB", () => {
 
   it("should return comment with book", async () => {
     try {
-      const results = await handler.getBook(response.data.bookId);
-      console.log(results);
+      const results = await handler.getBook(bookId);
+      const bookComment = results.data.book?.comments[0];
+      expect(bookComment.comment).toEqual(requestData.comment);
     } catch (error) {
       expect(true).toEqual(false);
     }

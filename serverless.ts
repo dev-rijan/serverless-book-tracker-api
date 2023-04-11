@@ -1,10 +1,9 @@
 import type { AWS } from "@serverless/typescript";
 import dynamoDbTables from "./resources/dynamodb-tables";
-import cloudwatchAlarms from "./resources/cloudwatch-alarms";
 import functions from "./resources/functions";
 
 const serverlessConfiguration: AWS = {
-  service: "todo-list",
+  service: "book-tracker",
   frameworkVersion: "3",
   plugins: [
     "serverless-esbuild",
@@ -155,7 +154,6 @@ const serverlessConfiguration: AWS = {
   resources: {
     Resources: {
       ...dynamoDbTables,
-      ...cloudwatchAlarms,
     },
   },
 };
