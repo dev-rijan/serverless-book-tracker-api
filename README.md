@@ -1,10 +1,11 @@
 # Book tracker app api
 
-AWS serverless(lambda, dynamodb) using serverless framework.
+AWS serverless(lambda, dynamodb) using serverless framework.  
+Also configured dynamodb and serverless-offline for local development.
 
 ## Install and run locally
 
-For development, you need to have serverless, npm and/or yarn globally installed.
+For development, you need to have serverless, npm and/or yarn globally installed.  
 I also prefer using NVM to manage my Node versions.
 Tested in node v14.
 
@@ -14,22 +15,37 @@ npm install -g serverless
 ```
 
 Step2: Configure AWS
-Setup AWS CLI if you have not already.
+Setup AWS CLI if you have not already. 
+you can find useful article here [create and configure AWS credentials](https://levelup.gitconnected.com/configure-aws-for-development-and-deployment-ad822097fc22)
 ```shell
 npm install
 ```
 
-### local
+step3: start local server
 
 ```shell
 # install dynamodb-local
 npm run dynamodb:install
+```
+If you get the error installing local dynamodb, Please delete package-lock.json and try to install package again.  
+For detail here is recent bug in [dunamodb local](https://github.com/99x/serverless-dynamodb-local/issues/294#issuecomment-1493389420)
 
+```
 # run serverless-offline
 npm run start:offline
 ```
 
-### AWS
+For lint 
+```
+npm run lint
+```
+
+Tests: Jest is used for tests
+```
+npm run test
+```
+
+### Deploy
 
 First, set up your AWS settings and run the following command.
 
