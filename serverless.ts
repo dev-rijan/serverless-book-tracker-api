@@ -1,27 +1,27 @@
-import type { AWS } from "@serverless/typescript";
-import dynamoDbTables from "./resources/dynamodb-tables";
-import functions from "./resources/functions";
+import type { AWS } from '@serverless/typescript'
+import dynamoDbTables from './resources/dynamodb-tables'
+import functions from './resources/functions'
 
 const serverlessConfiguration: AWS = {
-  service: "book-tracker",
-  frameworkVersion: "3",
+  service: 'book-tracker',
+  frameworkVersion: '3',
   plugins: [
-    "serverless-esbuild",
-    "serverless-dynamodb-local",
-    "serverless-offline",
-    "serverless-api-gateway-throttling",
-    "serverless-plugin-subscription-filter",
-    "serverless-plugin-aws-alerts",
-    "serverless-dotenv-plugin",
+    'serverless-esbuild',
+    'serverless-dynamodb-local',
+    'serverless-offline',
+    'serverless-api-gateway-throttling',
+    'serverless-plugin-subscription-filter',
+    'serverless-plugin-aws-alerts',
+    'serverless-dotenv-plugin',
   ],
   package: {
     individually: true,
   },
   provider: {
-    name: "aws",
-    runtime: "nodejs14.x",
-    stage: "dev",
-    region: "ap-northeast-1",
+    name: 'aws',
+    runtime: 'nodejs14.x',
+    stage: 'dev',
+    region: 'ap-northeast-1',
     logs: {
       restApi: {
         accessLogging: true,
@@ -38,9 +38,9 @@ const serverlessConfiguration: AWS = {
           "user" : "$context.identity.user",
           "requestTime": "$context.requestTime",
           "status": "$context.status"
-        }`.replace(/(\r\n|\n)/gm, ""),
+        }`.replace(/(\r\n|\n)/gm, ''),
         executionLogging: true,
-        level: "ERROR",
+        level: 'ERROR',
         fullExecutionData: false,
       },
       frameworkLambda: true,
@@ -50,36 +50,36 @@ const serverlessConfiguration: AWS = {
       minimumCompressionSize: 1024,
     },
     environment: {
-      AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
-      REGION: "${self:custom.region}",
-      STAGE: "${self:custom.stage}",
-      BOOK_TABLE: "${self:custom.bookTable}",
-      COMMENTS_TABLE: "${self:custom.commentsTable}",
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+      REGION: '${self:custom.region}',
+      STAGE: '${self:custom.stage}',
+      BOOK_TABLE: '${self:custom.bookTable}',
+      COMMENTS_TABLE: '${self:custom.commentsTable}',
     },
     iam: {
       role: {
         statements: [
           {
-            Effect: "Allow",
+            Effect: 'Allow',
             Action: [
-              "dynamodb:DescribeTable",
-              "dynamodb:Query",
-              "dynamodb:Scan",
-              "dynamodb:GetItem",
-              "dynamodb:PutItem",
-              "dynamodb:UpdateItem",
-              "dynamodb:DeleteItem",
+              'dynamodb:DescribeTable',
+              'dynamodb:Query',
+              'dynamodb:Scan',
+              'dynamodb:GetItem',
+              'dynamodb:PutItem',
+              'dynamodb:UpdateItem',
+              'dynamodb:DeleteItem',
             ],
             Resource: [
-              { "Fn::GetAtt": ["BookTable", "Arn"] },
-              { "Fn::GetAtt": ["CommentsTable", "Arn"] },
+              { 'Fn::GetAtt': ['BookTable', 'Arn'] },
+              { 'Fn::GetAtt': ['CommentsTable', 'Arn'] },
               {
-                "Fn::Join": [
-                  "/",
+                'Fn::Join': [
+                  '/',
                   [
-                    { "Fn::GetAtt": ["CommentsTable", "Arn"] },
-                    "index",
-                    "book_index",
+                    { 'Fn::GetAtt': ['CommentsTable', 'Arn'] },
+                    'index',
+                    'book_index',
                   ],
                 ],
               },
@@ -90,25 +90,25 @@ const serverlessConfiguration: AWS = {
     },
   },
   custom: {
-    region: "${opt:region, self:provider.region}",
-    stage: "${opt:stage, self:provider.stage}",
+    region: '${opt:region, self:provider.region}',
+    stage: '${opt:stage, self:provider.stage}',
     notificationMailAddress: "${opt:mail, 'rijanadhikari@gmail.com'}",
-    bookTable: "${self:service}-book-table-${opt:stage, self:provider.stage}",
+    bookTable: '${self:service}-book-table-${opt:stage, self:provider.stage}',
     commentsTable:
-      "${self:service}-comments-table-${opt:stage, self:provider.stage}",
+      '${self:service}-comments-table-${opt:stage, self:provider.stage}',
     tableThroughputs: {
       prod: 5,
       default: 1,
     },
     tableThroughput:
-      "${self:custom.tableThroughputs.${self:custom.stage}, self:custom.tableThroughputs.default}",
+      '${self:custom.tableThroughputs.${self:custom.stage}, self:custom.tableThroughputs.default}',
     dynamodb: {
-      stages: ["dev"],
+      stages: ['dev'],
       start: {
         port: 8008,
         inMemory: true,
-        heapInitial: "200m",
-        heapMax: "1g",
+        heapInitial: '200m',
+        heapMax: '1g',
         migrate: true,
         seed: true,
         convertEmptyValues: true,
@@ -118,16 +118,16 @@ const serverlessConfiguration: AWS = {
       bundle: true,
       minify: true,
       sourcemap: true,
-      exclude: ["aws-sdk"],
-      target: "node14",
-      define: { "require.resolve": undefined },
-      platform: "node",
+      exclude: ['aws-sdk'],
+      target: 'node14',
+      define: { 'require.resolve': undefined },
+      platform: 'node',
       concurrency: 10,
     },
-    "serverless-offline": {
+    'serverless-offline': {
       httpPort: 3000,
       babelOptions: {
-        presets: ["env"],
+        presets: ['env'],
       },
     },
     apiGatewayThrottling: {
@@ -135,19 +135,19 @@ const serverlessConfiguration: AWS = {
       maxConcurrentRequests: 5,
     },
     alerts: {
-      stages: ["prod"],
+      stages: ['prod'],
       topics: {
         alarm: {
-          topic: "${self:service}-${self:custom.stage}-alerts-alarm",
+          topic: '${self:service}-${self:custom.stage}-alerts-alarm',
           notifications: [
             {
-              protocol: "email",
-              endpoint: "${self:custom.notificationMailAddress}",
+              protocol: 'email',
+              endpoint: '${self:custom.notificationMailAddress}',
             },
           ],
         },
       },
-      alarms: ["functionErrors", "functionThrottles"],
+      alarms: ['functionErrors', 'functionThrottles'],
     },
   },
   functions,
@@ -156,6 +156,6 @@ const serverlessConfiguration: AWS = {
       ...dynamoDbTables,
     },
   },
-};
+}
 
-module.exports = serverlessConfiguration;
+module.exports = serverlessConfiguration

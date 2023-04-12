@@ -1,0 +1,8 @@
+node_modules
+.serverless
+.dynamodb
+.esbuild
+docs
+.vscode
+*.config.js
+**/*.js

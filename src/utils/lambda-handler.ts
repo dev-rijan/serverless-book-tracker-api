@@ -1,19 +1,19 @@
-import { APIGatewayEvent, APIGatewayProxyResult, Context } from "aws-lambda";
-import ResponseModel from "src/models/response.model";
-import "source-map-support/register";
+import { APIGatewayEvent, APIGatewayProxyResult, Context } from 'aws-lambda'
+import ResponseModel from 'src/models/response.model'
+import 'source-map-support/register'
 
 export type LambdaHandler = (
   event: APIGatewayEvent,
   context: Context
-) => Promise<APIGatewayProxyResult>;
+) => Promise<APIGatewayProxyResult>
 
 export type RequestHandler<REQ> = (
   body: REQ,
   params: QueryParams,
   context: Context
-) => Promise<ResponseModel>;
+) => Promise<ResponseModel>
 
-export type QueryParams = Record<string, string>;
+export type QueryParams = Record<string, string>
 
 export const wrapAsRequest = <REQ = unknown>(
   handler: RequestHandler<REQ>
@@ -22,15 +22,15 @@ export const wrapAsRequest = <REQ = unknown>(
     event: APIGatewayEvent,
     context: Context
   ): Promise<APIGatewayProxyResult> => {
-    const requestData: REQ = event.body ? JSON.parse(event.body) : undefined;
+    const requestData: REQ = event.body ? JSON.parse(event.body) : undefined
     const params = Object.keys(event.queryStringParameters || {}).reduce(
       (acc, cur) => {
-        acc[cur] = event.queryStringParameters?.[cur];
-        return acc;
+        acc[cur] = event.queryStringParameters?.[cur]
+        return acc
       },
       {}
-    );
-    const response = await handler(requestData, params, context);
-    return response.generate();
-  };
-};
+    )
+    const response = await handler(requestData, params, context)
+    return response.generate()
+  }
+}
