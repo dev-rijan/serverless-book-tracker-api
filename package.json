@@ -13,7 +13,7 @@
     "lint": "eslint --fix --ext \".ts,.js\" --ignore-path .eslintignore .",
     "typecheck": "tsc --noEmit",
     "prettier": "prettier -w tests/ src/ resources/",
-    "test": "jest"
+    "test": "jest --maxWorkers=2"
   },
   "dependencies": {
     "ajv": "^8.12.0",
@@ -55,27 +55,6 @@
     "serverless-dynamodb-local": {
       "dynamodb-localhost": "https://github.com/99x/dynamodb-localhost#db30898f8c40932c7177be7b2f1a81360d12876d"
     }
-  },
-  "jest": {
-    "roots": [
-      "<rootDir>/tests"
-    ],
-    "testMatch": [
-      "**/__tests__/**/*.+(ts|tsx|js)",
-      "**/?(*.)+(spec|test).+(ts|tsx|js)"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)$": "ts-jest"
-    },
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node",
-      "vue"
-    ]
   },
   "author": "Rijan adhikari",
   "license": "MIT"
