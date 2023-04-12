@@ -5,6 +5,7 @@ import functions from './resources/functions'
 const serverlessConfiguration: AWS = {
   service: 'book-tracker',
   frameworkVersion: '3',
+  useDotenv: true,
   plugins: [
     'serverless-esbuild',
     'serverless-dynamodb-local',
@@ -92,7 +93,7 @@ const serverlessConfiguration: AWS = {
   custom: {
     region: '${opt:region, self:provider.region}',
     stage: '${opt:stage, self:provider.stage}',
-    notificationMailAddress: "${opt:mail, 'rijanadhikari@gmail.com'}",
+    notificationMailAddress: "${env:NOTIFICATION_MAIL_ADDRESS, 'rijanadhikari@gmail.com'}",
     bookTable: '${self:service}-book-table-${opt:stage, self:provider.stage}',
     commentsTable:
       '${self:service}-comments-table-${opt:stage, self:provider.stage}',
@@ -105,7 +106,7 @@ const serverlessConfiguration: AWS = {
     dynamodb: {
       stages: ['dev'],
       start: {
-        port: 8008,
+        port: '${env:LOCAL_DYNAMODB_PORT, 8000}',
         inMemory: true,
         heapInitial: '200m',
         heapMax: '1g',
@@ -125,7 +126,7 @@ const serverlessConfiguration: AWS = {
       concurrency: 10,
     },
     'serverless-offline': {
-      httpPort: 3000,
+      httpPort: '${env:DEV_PORT, 3000}',
       babelOptions: {
         presets: ['env'],
       },
