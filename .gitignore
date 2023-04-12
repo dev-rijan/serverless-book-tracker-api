@@ -16,3 +16,4 @@ jspm_packages
 dynamodb_local
 .esbuild
 coverage/
+.env
