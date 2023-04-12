@@ -1,6 +1,6 @@
 import axios, { AxiosResponse, AxiosError } from 'axios'
 
-const BASE_URL = 'http://localhost:3000/dev/'
+const BASE_URL = process.env.BASE_URL
 
 const _delete = (url: string, params = {}): Promise<AxiosResponse> => {
   return new Promise((resolve, reject) => {
