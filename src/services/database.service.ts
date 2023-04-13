@@ -1,10 +1,10 @@
 import * as AWS from 'aws-sdk'
 
-import ResponseModel from '../models/response.model'
+import ResponseModel from '@/models/response.model'
 
-import { StatusCode } from '../enums/status-code.enum'
-import { ResponseMessage } from '../enums/response-message.enum'
-import IConfig from '../interfaces/config.interface'
+import { StatusCode } from '@/enums/status-code.enum'
+import { ResponseMessage } from '@/enums/response-message.enum'
+import IConfig from '@/interfaces/config.interface'
 
 export type PutItem = AWS.DynamoDB.DocumentClient.PutItemInput
 export type PutItemOutput = AWS.DynamoDB.DocumentClient.PutItemOutput
@@ -34,7 +34,7 @@ const config: IConfig = {
 if (STAGE === 'dev') {
   config.accessKeyId = 'dummy'
   config.secretAccessKey = 'dummy'
-  config.endpoint = 'http://localhost:8008'
+  config.endpoint = `http://localhost:${process.env.LOCAL_DYNAMODB_PORT}`
   console.log('dynamodb-local mode', config)
 } else {
   console.log('running dynamodb on aws on', STAGE)

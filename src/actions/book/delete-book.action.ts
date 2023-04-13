@@ -1,15 +1,15 @@
 import 'source-map-support/register'
 
-import ResponseModel from '../../models/response.model'
+import ResponseModel from '@/models/response.model'
 import DatabaseService, {
   DeleteItem,
   QueryItem,
-} from '../../services/database.service'
-import { createChunks, databaseTables, validateRequest } from '../../utils/util'
-import { BookQuerySchema } from '../../schemas/book.schema'
-import { QueryParams, wrapAsRequest } from '../../utils/lambda-handler'
-import { StatusCode } from '../../enums/status-code.enum'
-import { ResponseMessage } from '../../enums/response-message.enum'
+} from '@/services/database.service'
+import { createChunks, databaseTables, validateRequest } from '@/utils/util'
+import { BookQuerySchema } from '@/schemas/book.schema'
+import { QueryParams, wrapAsRequest } from '@/utils/lambda-handler'
+import { StatusCode } from '@/enums/status-code.enum'
+import { ResponseMessage } from '@/enums/response-message.enum'
 
 const deleteBookHandler = async (
   _body: never,

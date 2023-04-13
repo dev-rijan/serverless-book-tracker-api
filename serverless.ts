@@ -93,7 +93,8 @@ const serverlessConfiguration: AWS = {
   custom: {
     region: '${opt:region, self:provider.region}',
     stage: '${opt:stage, self:provider.stage}',
-    notificationMailAddress: "${env:NOTIFICATION_MAIL_ADDRESS, 'rijanadhikari@gmail.com'}",
+    notificationMailAddress:
+      "${env:NOTIFICATION_MAIL_ADDRESS, 'rijanadhikari@gmail.com'}",
     bookTable: '${self:service}-book-table-${opt:stage, self:provider.stage}',
     commentsTable:
       '${self:service}-comments-table-${opt:stage, self:provider.stage}',
