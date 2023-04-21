@@ -1,6 +1,6 @@
 import Ajv, { JSONSchemaType } from 'ajv'
 
-import ResponseModel from '../models/response.model'
+import ResponseModel from '@/models/response.model'
 
 export const validateRequest = <INPUT>(
   values: INPUT,

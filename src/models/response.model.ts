@@ -1,4 +1,4 @@
-import { Status } from '../enums/status.enum'
+import { Status } from '@/enums/status.enum'
 
 type ResponseHeader = { [header: string]: string | number | boolean }
 

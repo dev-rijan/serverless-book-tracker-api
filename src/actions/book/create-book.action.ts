@@ -1,15 +1,15 @@
 import 'source-map-support/register'
 
-import BookModel, { IBookInterface } from '../../models/book.model'
-import ResponseModel from '../../models/response.model'
+import BookModel, { IBookInterface } from '@/models/book.model'
+import ResponseModel from '@/models/response.model'
 
-import DatabaseService, { PutItem } from '../../services/database.service'
-import { databaseTables, validateRequest } from '../../utils/util'
+import DatabaseService, { PutItem } from '@/services/database.service'
+import { databaseTables, validateRequest } from '@/utils/util'
 
-import { BookSchema } from '../../schemas/book.schema'
-import { wrapAsRequest } from '../../utils/lambda-handler'
-import { StatusCode } from '../../enums/status-code.enum'
-import { ResponseMessage } from '../../enums/response-message.enum'
+import { BookSchema } from '@/schemas/book.schema'
+import { wrapAsRequest } from '@/utils/lambda-handler'
+import { StatusCode } from '@/enums/status-code.enum'
+import { ResponseMessage } from '@/enums/response-message.enum'
 
 const createBookHandler = async (
   body: IBookInterface

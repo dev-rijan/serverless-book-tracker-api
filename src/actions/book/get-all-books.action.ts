@@ -1,11 +1,11 @@
 import 'source-map-support/register'
 
-import ResponseModel from '../../models/response.model'
-import DatabaseService, { QueryItem } from '../../services/database.service'
-import { databaseTables } from '../../utils/util'
-import { wrapAsRequest } from '../../utils/lambda-handler'
-import { StatusCode } from '../../enums/status-code.enum'
-import { ResponseMessage } from '../../enums/response-message.enum'
+import ResponseModel from '@/models/response.model'
+import DatabaseService, { QueryItem } from '@/services/database.service'
+import { databaseTables } from '@/utils/util'
+import { wrapAsRequest } from '@/utils/lambda-handler'
+import { StatusCode } from '@/enums/status-code.enum'
+import { ResponseMessage } from '@/enums/response-message.enum'
 
 const getAllBookHandler = async (_body: never): Promise<ResponseModel> => {
   const databaseService = new DatabaseService()

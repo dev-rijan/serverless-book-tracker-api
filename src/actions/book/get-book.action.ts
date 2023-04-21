@@ -1,12 +1,12 @@
 import 'source-map-support/register'
 
-import ResponseModel from '../../models/response.model'
-import DatabaseService, { QueryItem } from '../../services/database.service'
-import { databaseTables, validateRequest } from '../../utils/util'
-import { BookQuerySchema } from '../../schemas/book.schema'
-import { QueryParams, wrapAsRequest } from '../../utils/lambda-handler'
-import { StatusCode } from '../../enums/status-code.enum'
-import { ResponseMessage } from '../../enums/response-message.enum'
+import ResponseModel from '@/models/response.model'
+import DatabaseService, { QueryItem } from '@/services/database.service'
+import { databaseTables, validateRequest } from '@/utils/util'
+import { BookQuerySchema } from '@/schemas/book.schema'
+import { QueryParams, wrapAsRequest } from '@/utils/lambda-handler'
+import { StatusCode } from '@/enums/status-code.enum'
+import { ResponseMessage } from '@/enums/response-message.enum'
 
 const getBookHandler = async (
   _body: never,
